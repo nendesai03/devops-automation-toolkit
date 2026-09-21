@@ -11,10 +11,11 @@ real infrastructure work across AWS, Azure, and Kubernetes environments.
 
 ## Why this exists
 
-Most cloud waste and security gaps come from small things nobody automates — 
-unused resources quietly costing money, overly permissive IAM policies, 
-storage buckets with no lifecycle management. These scripts solve specific, 
-recurring problems I've run into managing production infrastructure.
+Most cloud waste, security gaps, and outages come from small things nobody 
+automates — unused resources quietly costing money, overly permissive IAM 
+policies, storage buckets with no lifecycle management, certs expiring 
+without warning. These scripts solve specific, recurring problems I've run 
+into managing production infrastructure.
 
 ---
 
@@ -23,11 +24,11 @@ recurring problems I've run into managing production infrastructure.
 | Script | Category | What it solves | Status |
 |---|---|---|---|
 | [aws-unused-resources-finder](./aws/unused-resources-finder) | Cost | Flags idle EBS volumes, unattached EIPs, low-utilization EC2 instances | ✅ |
-| [aws-s3-lifecycle-audit](./aws/s3-lifecycle-audit) | Cost | Flags buckets missing lifecycle policies, unmanaged versioning, stale multipart uploads | ✅ |
+| [s3-lifecycle-audit](./aws/s3-lifecycle-audit) | Cost | Flags buckets missing lifecycle policies, unmanaged versioning, stale multipart uploads | ✅ |
 | [iam-policy-auditor](./aws/iam-policy-auditor) | Security | Flags IAM policies with wildcard actions or resources | ✅ |
+| [cert-expiry-checker](./monitoring/cert-expiry-checker) | Monitoring | Alerts before SSL certs expire | ✅ |
 | [azure-orphaned-resources-cleanup](./azure/orphaned-resources-cleanup) | Cost | Finds unused NICs, public IPs, and disks | 🔜 |
 | [db-backup-automation](./backup/db-backup-automation) | Reliability | Scheduled DB backups with cloud upload + rotation | 🔜 |
-| [cert-expiry-checker](./monitoring/cert-expiry-checker) | Monitoring | Alerts before SSL certs expire | ✅ |
 | [log-rotation-cleanup](./monitoring/log-rotation-cleanup) | Monitoring | Rotates and archives logs past size/age thresholds | 🔜 |
 | [pipeline-notification-bot](./cicd/pipeline-notification-bot) | CI/CD | Sends formatted build/deploy status to Slack/Teams | 🔜 |
 | [docker-image-cleanup](./cicd/docker-image-cleanup) | CI/CD | Prunes old/unused Docker images on build servers | 🔜 |
@@ -37,9 +38,9 @@ recurring problems I've run into managing production infrastructure.
 ## How to use
 
 Each script folder has its own README with setup, usage, and sample output. 
-All scripts are plain Bash — minimal dependencies such as AWS CLI v2, `jq`, 
-`openssl`, or `bc`. Read-only by design: nothing here modifies or deletes 
-cloud resources, they only report findings.
+All scripts are plain Bash — no dependencies beyond AWS CLI v2, `jq`, and 
+`openssl` (and `bc` for the resource finder). Read-only by design: nothing 
+here modifies or deletes cloud resources, they only report findings.
 
 ---
 
