@@ -27,7 +27,7 @@ recurring problems I've run into managing production infrastructure.
 | [iam-policy-auditor](./aws/iam-policy-auditor) | Security | Flags IAM policies with wildcard actions or resources | ✅ |
 | [azure-orphaned-resources-cleanup](./azure/orphaned-resources-cleanup) | Cost | Finds unused NICs, public IPs, and disks | 🔜 |
 | [db-backup-automation](./backup/db-backup-automation) | Reliability | Scheduled DB backups with cloud upload + rotation | 🔜 |
-| [cert-expiry-checker](./monitoring/cert-expiry-checker) | Monitoring | Alerts before SSL certs expire | 🔜 |
+| [cert-expiry-checker](./monitoring/cert-expiry-checker) | Monitoring | Alerts before SSL certs expire | ✅ |
 | [log-rotation-cleanup](./monitoring/log-rotation-cleanup) | Monitoring | Rotates and archives logs past size/age thresholds | 🔜 |
 | [pipeline-notification-bot](./cicd/pipeline-notification-bot) | CI/CD | Sends formatted build/deploy status to Slack/Teams | 🔜 |
 | [docker-image-cleanup](./cicd/docker-image-cleanup) | CI/CD | Prunes old/unused Docker images on build servers | 🔜 |
@@ -37,9 +37,9 @@ recurring problems I've run into managing production infrastructure.
 ## How to use
 
 Each script folder has its own README with setup, usage, and sample output. 
-All scripts are plain Bash — no dependencies beyond AWS CLI v2 and `jq` 
-(and `bc` for the resource finder). Read-only by design: nothing here 
-modifies or deletes cloud resources, they only report findings.
+All scripts are plain Bash — minimal dependencies such as AWS CLI v2, `jq`, 
+`openssl`, or `bc`. Read-only by design: nothing here modifies or deletes 
+cloud resources, they only report findings.
 
 ---
 
